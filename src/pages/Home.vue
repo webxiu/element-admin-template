@@ -57,10 +57,16 @@
 
     <div class="content">
       <div class="nav-top">
-        <span class="collapse" @click="isCollapse = !isCollapse">
-          <i :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></i>
-          <span v-for="(item,index) in nav" :key="index">{{item}}</span>
-        </span>
+        <div class="collapse" @click="isCollapse = !isCollapse">
+          <span class="opt">
+            <i :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></i>
+          </span>
+          <span class="nav-menu" v-for="(item,index) in nav" :key="index">{{item}}</span>
+          
+        </div>
+        <div>
+          [退出]
+        </div>
         
       </div>
       <router-view />
@@ -72,7 +78,7 @@ export default {
   data() {
     return {
       isCollapse: false,
-      nav: [],
+      nav: ['首页'],
       menuList: [
         {
           title: "首页",
@@ -259,14 +265,38 @@ export default {
     background: #ecf5ff;
     .nav-top {
       height: 50px;
-      background: #f60;
+      background: #ead3c4;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 10px;
+      .opt{
+        margin-right: 15px;
+      }
       .collapse {
         font-size: 20px;
       }
+    }
+    .nav-menu{
+      color: #9c6d6d;
+      vertical-align: middle;
+      font-size: 14px;
+      position: relative;
+      margin-right: 10px;
+      
+    }
+    .nav-menu:not(:last-child):after{
+      content: "/";
+      position: absolute;
+      top: 0px;
+      right: -7px;
+      width: 4px;
+      height: 10px;
+      font-size: 14px;
+      color: #000;
+      clear: both;
+      display: block;
+
     }
   }
 }
